@@ -1,0 +1,486 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/categories":
+    get:
+      summary: List categories
+      tags:
+      - Categories
+      security:
+      - bearer: []
+      responses:
+        '200':
+          description: Successful
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+    post:
+      summary: Create category
+      tags:
+      - Categories
+      security:
+      - bearer: []
+      description: Creates a new category
+      parameters: []
+      responses:
+        '201':
+          description: Category Created
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '422':
+          description: Unprocesable Entity
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+  "/api/v1/categories/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show category
+      tags:
+      - Categories
+      security:
+      - bearer: []
+      responses:
+        '200':
+          description: Successful
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '404':
+          description: Category Not Found
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+    patch:
+      summary: Update category
+      tags:
+      - Categories
+      security:
+      - bearer: []
+      parameters: []
+      responses:
+        '200':
+          description: Successful
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '404':
+          description: Category Not Found
+          content: {}
+        '422':
+          description: Unprocesable Entity
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+    put:
+      summary: Update category
+      tags:
+      - Categories
+      security:
+      - bearer: []
+      parameters: []
+      responses:
+        '200':
+          description: Successful
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '404':
+          description: Category Not Found
+          content: {}
+        '422':
+          description: Unprocesable Entity
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+    delete:
+      summary: Delete category
+      tags:
+      - Categories
+      security:
+      - bearer: []
+      responses:
+        '200':
+          description: Successful
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '404':
+          description: Category Not Found
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+  "/api/v1/links":
+    get:
+      summary: List links
+      tags:
+      - Links
+      security:
+      - bearer: []
+      responses:
+        '200':
+          description: Successful
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+    post:
+      summary: Create link
+      tags:
+      - Links
+      security:
+      - bearer: []
+      description: Creates a new link between a tech and a category
+      parameters: []
+      responses:
+        '200':
+          description: Successful
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '409':
+          description: Link already exists
+          content: {}
+        '422':
+          description: Unprocesable Entity
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                link:
+                  type: object
+                  properties:
+                    category_id:
+                      type: integer
+                    tech_id:
+                      type: integer
+  "/api/v1/links/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show link
+      tags:
+      - Links
+      security:
+      - bearer: []
+      responses:
+        '200':
+          description: Successful
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '404':
+          description: Link Not Found
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+    delete:
+      summary: Delete link
+      tags:
+      - Links
+      security:
+      - bearer: []
+      description: Deletes the link between a tech and a category
+      responses:
+        '200':
+          description: Successful
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '404':
+          description: Link Not Found
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+  "/api/v1/login":
+    post:
+      summary: Create session
+      tags:
+      - Sessions
+      description: Creates a session for the supplied API user and returns a JWT token
+        to be used as a bearer token in the rest of the API
+      parameters: []
+      responses:
+        '201':
+          description: Successful
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '500':
+          description: Internal server error
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                session:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    password:
+                      type: string
+  "/api/v1/techs":
+    get:
+      summary: List techs
+      tags:
+      - Techs
+      security:
+      - bearer: []
+      responses:
+        '200':
+          description: Successful
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+    post:
+      summary: Create tech
+      tags:
+      - Techs
+      security:
+      - bearer: []
+      description: Creates a new tech
+      parameters: []
+      responses:
+        '201':
+          description: Tech Created
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '422':
+          description: Unprocesable Entity
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tech:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+  "/api/v1/techs/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show tech
+      tags:
+      - Techs
+      security:
+      - bearer: []
+      responses:
+        '200':
+          description: Successful
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '404':
+          description: Tech Not Found
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+    patch:
+      summary: Update tech
+      tags:
+      - Techs
+      security:
+      - bearer: []
+      parameters: []
+      responses:
+        '200':
+          description: Successful
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '404':
+          description: Tech Not Found
+          content: {}
+        '422':
+          description: Unprocesable Entity
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tech:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+    put:
+      summary: Update tech
+      tags:
+      - Techs
+      security:
+      - bearer: []
+      parameters: []
+      responses:
+        '200':
+          description: Successful
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '404':
+          description: Tech Not Found
+          content: {}
+        '422':
+          description: Unprocesable Entity
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tech:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+    delete:
+      summary: Delete tech
+      tags:
+      - Techs
+      security:
+      - bearer: []
+      responses:
+        '200':
+          description: Successful
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '404':
+          description: Tech Not Found
+          content: {}
+        '500':
+          description: Internal Server Error
+          content: {}
+components:
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
